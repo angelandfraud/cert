@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel & Fraud</title>
+    <!-- Link to Acumin Wide font -->
+    <link href="https://fonts.googleapis.com/css2?family=Acumin+Wide&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: RGB(237, 237, 237); /* Inverted to white */
+        font-family: 'Helvetica', sans-serif;
+      }
+
+      #container {
+        width: 100%;
+        max-width: 400px; /* Reduced max width */
+        background-color: RGB(237, 237, 237); /* Inverted to white */
+        border-radius: 0px;
+        padding: 15px; /* Reduced padding */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adjusted for lighter background */
+        text-align: left;
+        color: #e0e0e0; /* Light text on white background */
+      }
+
+      #title_container {
+        margin-top: 30px; /* Reduced margin */
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+      }
+
+      #title_container img {
+        width: 130%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        max-width: 300px; /* Reduced max-width for logo */
+      }
+
+      #title_container1 h2 {
+        font-family: 'Helvetica', Arial, sans-serif;
+        font-size: 18px; /* Reduced font size */
+        margin: 0;
+        padding: 8px 0; /* Reduced padding */
+        color: #131313; /* Inverted to black */
+        font-weight: lighter;
+        text-align: center;
+      }
+
+      #form_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px; /* Added margin */
+      }
+
+      #form_container label {
+        font-family: 'Acumin Wide', sans-serif;
+        font-size: 12px; /* Reduced font size */
+        margin-bottom: 5px;
+        color: #131313; /* Inverted to black */
+        align-items: center;
+      }
+
+      #form_container input {
+        width: 100%;
+        max-width: 250px; /* Reduced width */
+        padding: 6px; /* Reduced padding */
+        margin-bottom: 0px;
+        border: none;
+        background-color: transparent;
+        color: #131313; /* Inverted to black */
+        font-size: 12px; /* Reduced font size */
+        font-family: 'Acumin Wide', sans-serif;
+        outline: none;
+        align-items: flex-start;
+      }
+
+      #form_container input::placeholder {
+        color: #131313; /* Inverted to black */
+      }
+
+      /* Light grey color for Serial Code field */
+      #uidcode {
+        background-color: #ccc; /* Inverted to light grey */
+        color: #131313; /* Inverted to black */
+      }
+
+      /* Center Authentic field */
+      #authentic-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px; /* Space below Authentic */
+      }
+
+      #authentic {
+        width: auto;
+        padding: 8px;
+        background-color: #e0ffe0; /* Light green for authentic */
+        color: #131313; /* Inverted to black */
+        border: none;
+        font-size: 10px; /* Keep font size larger for emphasis */
+        font-weight: bold;
+        text-align: center;
+        border-radius: 5px;
+      }
+
+      /* Not Authentic Styling */
+      #authentic.not-authentic {
+        background-color: #ffd6d6; /* Light red for not authentic */
+      }
+
+      .read-only-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Align fields to the top */
+    gap: 4px; /* Small gap between fields */
+    margin-bottom: 8px; /* Reduced margin */
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  .read-only-container div {
+    flex: 1 1 20%; /* Adjust dynamic sizing */
+    max-width: 80px; /* Adjust field size */
+    text-align: center;
+  }
+
+  .read-only-container label {
+    font-size: 6px; /* Smaller label size */
+    color: #131313; /* Maintain readable color */
+    white-space: nowrap; /* Prevent label wrapping */
+  }
+
+  .read-only-container textarea {
+    font-size: 10px; /* Smaller text size */
+    background-color: transparent;
+    color: #131313; /* Maintain contrast */
+    border: none;
+    text-align: center;
+    cursor: not-allowed;
+    width: 100%; /* Adjust to container width */
+    height: auto; /* Allow dynamic height */
+    padding: 2px; /* Minimal padding */
+    resize: none; /* Disable resizing */
+    box-sizing: border-box; /* Include padding in the box model */
+    overflow: hidden; /* Hide unnecessary scrollbars */
+    line-height: 1; /* Tighter line spacing */
+  }
+
+      #button_container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 15px; /* Added margin */
+      }
+
+      #submit {
+        width: 100%;
+        max-width: 120px; /* Reduced width */
+        padding: 8px;
+        background-color: #ddd; /* Light grey button */
+        border: none;
+        border-radius: 5px;
+        font-size: 12px; /* Reduced font size */
+        font-weight: bold;
+        color: #131313; /* Inverted to black */
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      #submit:hover {
+        background-color: RGB(237, 237, 237);
+        color: #131313;
+      }
+
+      #verifying-popup {
+        display: none; /* Initially hidden */
+        text-align: center;
+        color: #131313; /* Inverted to black */
+        font-size: 14px; /* Adjust font size */
+        padding: 20px;
+        background-color: #e6e6e6; /* Light grey background */
+        border-radius: 10px;
+        margin: 20px auto;
+        width: 90%; /* Adjust size */
+      }
+
+      #progress-bar-container {
+        width: 100%;
+        background-color: #ccc; /* Light grey for progress bar container */
+        height: 8px;
+        border-radius: 5px;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+
+      #progress-bar {
+        width: 0%;
+        height: 100%;
+        background-color: #131313; /* Black progress bar */
+        transition: width 2s ease-in-out;
+      }
+
+      #spline_container {
+        margin-top: 0px;
+        height: 200px;
+        clip-path: inset(0 0 30% 0); /* Masks the bottom 30% */
+        overflow: hidden; /* Ensures anything outside the masked area doesn't show */
+      }
+
+      @media (max-width: 768px) {
+        #container {
+          width: 90%;
+        }
+
+        #submit {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="title_container">
+        <!-- Replace with your logo image -->
+        <img src="BrandTypeFace.png" alt="Angel & Fraud Logo">
+      </div>
+
+      <div id="title_container1">
+        <h2></h2>
+      </div>
+      <div id="form_container">
+        <label for="uidcode" style="font-family:monospace;font-weight: bold;">S E R I A L C O D E</label>
+        <input type="text" style="border-bottom: 1px solid #240000;background-color: RGB(237, 239, 237);font-family: 'Roboto Mono', monospace;align-items: center;    text-align: center;" id="uidcode" placeholder="Serial Code">
+        <div>
+          <p style="color: #131313;align-content: center;font-size:xx-small;margin-bottom: 40px;padding-left: 19%;padding-right: 19.5%;font-family: 'Courier New', Courier, monospace;font-weight: lighter">please enter the serial code from the product tag or scan the QR to verify authenticity.</p>
+        </div>
+        <div id="verifying-popup">
+          <p>Verifying...</p>
+          <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+          </div>
+        </div>
+        <div id="authentic-container">
+          <label for="authentic" style="font-size: 9px; color: #131313;font-family:Arial, Helvetica, sans-serif">AUTHENTIC</label>
+          <input type="text" id="authentic" value="Authentic" readonly>
+        </div>
+        <div class="read-only-container">
+          <div>
+            <label for="productid" style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">Product ID</label>
+            <textarea id="productid" readonly style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">productid</textarea>
+          </div>
+          <div>
+            <label for="customername" style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">Purchased</label>
+            <textarea id="customername" readonly style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">customername</textarea>
+          </div>
+          <div>
+            <label for="purchasedate" style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">Purchase Date</label>
+            <textarea id="purchasedate" readonly style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">---</textarea>
+          </div>
+          <div>
+            <label for="collection" style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">Collection</label>
+            <textarea id="collection" readonly style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">collection</textarea>
+          </div>
+          <div>
+            <label for="product" style="font-size:8.5px; font-family: 'Roboto Mono', monospace;">Product</label>
+            <textarea id="product" readonly style="font-size:8.5px; font-family: 'Roboto Mono', monospace;" >product</textarea>
+          </div>
+        </div>
+        
+        <div class="read-only-container">
+
+
+        </div>
+        
+      </div>
+
+      <div id="button_container">
+        <button id="submit" onclick="get()">SUBMIT</button>
+      </div>
+
+      <div id="spline_container">
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
+        <spline-viewer url="https://prod.spline.design/jnBXnNR1PE6b0mYC/scene.splinecode"></spline-viewer>
+      </div>
+    </div>
+
+    <script>
+      function getUrlParameter(param) {
+        var url = window.location.search.substring(1);
+        var urlParams = new URLSearchParams(url);
+        return urlParams.get(param);
+      }
+
+      function autoSubmitWithUID() {
+        var uidFromUrl = getUrlParameter('uid');
+        if (uidFromUrl) {
+          document.getElementById('uidcode').value = uidFromUrl;
+          document.getElementById('submit').click();
+        }
+      }
+
+      window.onload = function() {
+        autoSubmitWithUID();
+      };
+    </script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
